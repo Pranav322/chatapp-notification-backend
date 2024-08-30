@@ -31,8 +31,8 @@ const serverStartTime = Date.now(); // Track when the server started
 
 // Path to the specific subcollection
 const specificMessagesRef = db.collection('messages')
-  .doc('u2KgAcqSzrSoL2DZIEGZySsmNWo1-Au1Lb3viduUE2KmfI4xXDgsVYAO2')
-  .collection('u2KgAcqSzrSoL2DZIEGZySsmNWo1-Au1Lb3viduUE2KmfI4xXDgsVYAO2');
+  .doc('NnDlHK8QVQaBcTkXPNXIHtFFoiW2-Au1Lb3viduUE2KmfI4xXDgsVYAO2/1724948456634')
+  .collection('NnDlHK8QVQaBcTkXPNXIHtFFoiW2-Au1Lb3viduUE2KmfI4xXDgsVYAO2/1724948456634');
 
 // Function to handle snapshot changes
 async function snapshotHandler(snapshot) {
