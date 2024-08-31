@@ -1,4 +1,5 @@
-const express = require('express'); // Import Express for the server
+
+const http = require('http'); // Native Node.js HTTP module
 const admin = require('firebase-admin');
 const dotenv = require('dotenv');
 
@@ -136,15 +137,14 @@ specificMessagesRef.onSnapshot(snapshotHandler, error => {
   console.error("Error listening to Firestore changes:", error);
 });
 
-// Set up a basic HTTP server with Express to keep Render happy
-const app = express();
+// Set up a simple HTTP server using Node's built-in http module
 const port = process.env.PORT || 3000; // Use the port from the environment variable or default to 3000
-
-app.get('/', (req, res) => {
-  res.send('This server is running and listening to Firestore changes.');
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('This server is running and listening to Firestore changes.\n');
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
