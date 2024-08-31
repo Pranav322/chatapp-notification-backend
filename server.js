@@ -1,3 +1,4 @@
+const express = require('express'); // Import Express for the server
 const admin = require('firebase-admin');
 const dotenv = require('dotenv');
 
@@ -31,8 +32,8 @@ const serverStartTime = Date.now(); // Track when the server started
 
 // Path to the specific subcollection
 const specificMessagesRef = db.collection('messages')
-  .doc('NnDlHK8QVQaBcTkXPNXIHtFFoiW2-Au1Lb3viduUE2KmfI4xXDgsVYAO2')
-  .collection('NnDlHK8QVQaBcTkXPNXIHtFFoiW2-Au1Lb3viduUE2KmfI4xXDgsVYAO2');
+  .doc('u2KgAcqSzrSoL2DZIEGZySsmNWo1-Au1Lb3viduUE2KmfI4xXDgsVYAO2')
+  .collection('u2KgAcqSzrSoL2DZIEGZySsmNWo1-Au1Lb3viduUE2KmfI4xXDgsVYAO2');
 
 // Function to handle snapshot changes
 async function snapshotHandler(snapshot) {
@@ -99,11 +100,6 @@ async function snapshotHandler(snapshot) {
   });
 }
 
-
-
-
-
-
 // Function to send notifications using FCM Admin SDK v2
 function sendNotification(token, senderNickname, message) {
   const messagePayload = {
@@ -138,6 +134,18 @@ function sendNotification(token, senderNickname, message) {
 // Listen to changes in the specific subcollection
 specificMessagesRef.onSnapshot(snapshotHandler, error => {
   console.error("Error listening to Firestore changes:", error);
+});
+
+// Set up a basic HTTP server with Express to keep Render happy
+const app = express();
+const port = process.env.PORT || 3000; // Use the port from the environment variable or default to 3000
+
+app.get('/', (req, res) => {
+  res.send('This server is running and listening to Firestore changes.');
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
 
 console.log("Firestore listener set up. Waiting for changes...");
